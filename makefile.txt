@@ -1,0 +1,7 @@
+for generic compilation
+    g++ -Ofast bbc.cpp -o ../bitboard_chess/bbc.out 
+    ../bitboard_chess/bbc.out
+
+debug:
+    g++ bbc.cpp -o ../bitboard_chess/bbc.out 
+    ../bitboard_chess/bbc.out
