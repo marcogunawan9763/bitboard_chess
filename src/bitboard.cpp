@@ -1,23 +1,4 @@
-// system headers
-#include <cstdio>
-#include <cstdint>
-#include <iostream>
-
-// define bitboard data type
-using namespace std;
-using U64 = uint64_t;
-
-//board squares
-enum {
-    a8, b8, c8, d8, e8, f8, g8, h8, 
-    a7, b7, c7, d7, e7, f7, g7, h7, 
-    a6, b6, c6, d6, e6, f6, g6, h6,  
-    a5, b5, c5, d5, e5, f5, g5, h5, 
-    a4, b4, c4, d4, e4, f4, g4, h4,  
-    a3, b3, c3, d3, e3, f3, g3, h3, 
-    a2, b2, c2, d2, e2, f2, g2, h2, 
-    a1, b1, c1, d1, e1, f1, g1, h1
-};
+#include "bitboard.h"
 
 //bit operating macros for cleaner code
 //check if there is a bit in a given square
@@ -69,22 +50,4 @@ void print_bitboard(U64 bitboard){
     cout << "\n\nBitboard: " << bitboard << "\n\n";
 }
 
-int main()
-{   
-    //define bitboard
-    U64 bitboard = 0ULL;
-
-    //setting some bits
-    set_bit(&bitboard, e2);
-    set_bit(&bitboard, c4);
-    set_bit(&bitboard, g7);
-
-    pop_bit(&bitboard, e2);
-
-    //print bitboard
-    print_bitboard(bitboard);
-
-
-    return 0;
-}
 
