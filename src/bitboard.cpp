@@ -1,7 +1,8 @@
+#include "lookup.h"
 #include "bitboard.h"
 
-//bit operating macros for cleaner code
-//check if there is a bit in a given square
+
+//checks if there is a bit in a given square
 bool get_bit(U64 bitboard, int square){
     return (bitboard & (1ULL << square));
     }
@@ -11,7 +12,7 @@ void set_bit(U64 *bitboard, int square){
     *bitboard |= (1ULL << square);
     }
 
-//pop/remove a bit in a given square
+//remove a bit in a given square
 void pop_bit(U64 *bitboard, int square){
     get_bit(*bitboard, square) ? *bitboard ^= (1ULL << square) : 0;
     }
@@ -49,5 +50,3 @@ void print_bitboard(U64 bitboard){
     //print bitboard as unsigned decimal number
     cout << "\n\nBitboard: " << bitboard << "\n\n";
 }
-
-

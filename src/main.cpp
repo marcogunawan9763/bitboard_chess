@@ -1,20 +1,16 @@
+#include "lookup.h"
 #include "bitboard.h"
+#include "attacks.h"
 
 int main()
-{   
-    //define bitboard
-    U64 bitboard = 0ULL;
+{     
 
-    //setting some bits
-    set_bit(&bitboard, e2);
-    set_bit(&bitboard, c4);
-    set_bit(&bitboard, g7);
-
-    pop_bit(&bitboard, e2);
-
-    //print bitboard
-    print_bitboard(bitboard);
-
+    //initialise leaper pieces attacks
+    init_pawn_attacks();
+    print_bitboard(pawn_attacks[black][e2]);
+    print_bitboard(not_a_file);
+    
+    
 
     return 0;
 }

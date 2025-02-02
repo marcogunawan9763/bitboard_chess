@@ -13,11 +13,13 @@ Features List:
     material/positions/pawns/mobility/king safety evaluation
     UCI protocol
 
-Matches versus other engine(s) + players
+Most features developed in this program is based off Chess Programming's guide series, 
+"Bitboard CHESS ENGINE in C": 
+https://www.youtube.com/watch?v=QUNP-UjujBM&list=PLmN0neTso3Jxh8ZIylk74JpwfiWNI76Cs&ab_channel=ChessProgramming
 
-Bitboard representation relative to array based representation greatly 
-optimises the problem and increases efficiency. The main benefit on the
-otherhand comes from the evaluation functions being greatly more expensive
-(isolated pawn islands, double pawn, etc)
+I am compilating his works and adapting it in C++, developing my own engine with hopefully some tweaks/
+improvements. However the main purpose of this codebase is personal education regarding how chess engines 
+are implemented and organisational skills/ industry practice on project code documentation, github, etc.
 
-compile with:
+I am also implementing it in C++ instead of C, to hopefully learn a new language as well ^^
+
