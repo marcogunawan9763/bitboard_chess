@@ -47,6 +47,18 @@ const U64 not_ab_file = 18229723555195321596U;
 //not HG file constant
 const U64 not_hg_file = 4557430888798830399U;
 
+//not 8 rank constant
+const U64 not_8_rank = 18446744073709551360U;
+
+//not 1 rank constant
+const U64 not_1_rank = 72057594037927935U;
+
+//not 78 rank constant
+const U64 not_78_rank = 18446744073709486080U;
+
+//not 12 rank constant
+const U64 not_12_rank = 281474976710655U;
+
 
 
 
