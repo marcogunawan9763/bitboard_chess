@@ -9,6 +9,7 @@ using U64 = uint64_t;
 
 U64 mask_pawn_attacks(int side, int square);
 void init_pawn_attacks();
+
 U64 mask_knight_attacks(int square);
 void init_knight_attacks();
 

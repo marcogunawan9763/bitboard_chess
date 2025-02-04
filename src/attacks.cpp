@@ -1,3 +1,10 @@
+/*
+ * File: attacks.cpp
+ * Description: This program generates the precalculated attack tables of every piece for lookup.
+ * Date: 2025-01-31
+ */
+
+
 #include "lookup.h"
 #include "attacks.h"
 #include "bitboard.h"
@@ -47,6 +54,7 @@ U64 mask_pawn_attacks(int side, int square){
         } 
     }
 
+    //return possible attacks for a pawn at a given square
     return attacks;
 }
 
@@ -130,12 +138,19 @@ U64 mask_knight_attacks(int square){
 
     }
 
+    //return possible attacks for a knight at a given square
     return attacks;
 }
 
-//initialise pawn attacks table
+//initialise knight attacks table
 void init_knight_attacks(){
     for (int square = 0; square < 64; square++){
         knight_attacks[square] = mask_knight_attacks(square);
     }
 }
+
+
+/*
+ROOK ATTACK TABLE INITIALISER
+
+*/
