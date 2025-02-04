@@ -5,6 +5,7 @@
  */
 
 
+
 #include "lookup.h"
 #include "attacks.h"
 #include "bitboard.h"
@@ -132,7 +133,6 @@ U64 mask_knight_attacks(int square){
         
         //can R
         if ((bitboard << 17) & not_a_file){
-            cout << "yay";
             attacks |= (bitboard << 17);
         }
 
@@ -154,3 +154,54 @@ void init_knight_attacks(){
 ROOK ATTACK TABLE INITIALISER
 
 */
+
+U64 mask_rook_attacks(int square){
+    //result attacks bitboard
+    U64 attacks = 0ULL;
+
+    //piece bitboard
+    U64 bitboard = 0ULL;
+
+    set_bit(&bitboard, square);
+
+    //variable to move the rook square
+    int step = 8;
+ 
+    //vertical up
+    while (((bitboard >> step) & not_1_rank) && (step < 64)){
+        attacks |= (bitboard >> step);
+        step += 8;
+    }
+
+    //vertical down
+    step = 8;
+    while ((bitboard << step) & not_8_rank){
+        attacks |= (bitboard << step);
+        step += 8;
+    }
+
+
+    //horizontal left
+    step = 1;
+    while ((bitboard >> step) & (not_h_file)){
+        attacks |= (bitboard >> step);
+        step += 1;
+    }
+
+
+     //horizontal right
+    step = 1;
+    while ((bitboard << step) & (not_a_file)){
+        attacks |= (bitboard << step);
+        step += 1;
+    }
+
+    return attacks;
+}
+
+//initilaises rook attacks
+void init_rook_attacks(){
+    for (int square = 0; square < 64; square++){
+        rook_attacks[square] = mask_rook_attacks(square);
+    }
+}

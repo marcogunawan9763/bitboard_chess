@@ -13,6 +13,8 @@ void init_pawn_attacks();
 U64 mask_knight_attacks(int square);
 void init_knight_attacks();
 
+U64 mask_rook_attacks(int square);
+void init_rook_attacks();
 
 // Lookup tables
 extern U64 pawn_attacks[2][64];
