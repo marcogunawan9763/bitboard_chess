@@ -1,10 +1,8 @@
 /*
  * File: attacks.cpp
  * Description: This program generates the precalculated attack tables of every piece for lookup.
- * Date: 2025-01-31
+ * Last updated: 2025-02-05
  */
-
-
 
 #include "lookup.h"
 #include "attacks.h"
@@ -59,14 +57,6 @@ U64 mask_pawn_attacks(int side, int square){
     return attacks;
 }
 
-//initialise pawn attacks table
-void init_pawn_attacks(){
-    for (int square = 0; square < 64; square++){
-        pawn_attacks[white][square] = mask_pawn_attacks(white, square);
-        pawn_attacks[black][square] = mask_pawn_attacks(black, square);
-    }
-}
-
 /*
 KNIGHT ATTACK TABLE INITIALISER
 
@@ -82,78 +72,50 @@ U64 mask_knight_attacks(int square){
 
     set_bit(&bitboard, square);
 
-    //can U
-    if(not_1_rank){
-        //can RR
-        if ((bitboard >> 6) & not_ab_file){
-            attacks |= (bitboard >> 6);
-        }
-        
-        //can LL
-        if ((bitboard >> 10) & not_hg_file){
-            attacks |= (bitboard >> 10);
-        }
+    if (((bitboard >> 6) & not_ab_file) && not_1_rank) attacks |= (bitboard >> 6);
+    if (((bitboard >> 10) & not_hg_file) && not_1_rank) attacks |= (bitboard >> 10);
+    if (((bitboard >> 15) & not_a_file) && not_12_rank) attacks |= (bitboard >> 15);
+    if (((bitboard >> 17) & not_h_file) && not_12_rank) attacks |= (bitboard >> 17);
 
-    }
-
-    //can UU
-    if (not_12_rank){
-        //can R
-        if ((bitboard >> 15) & not_a_file){
-            attacks |= (bitboard >> 15);
-        }
-        
-        //can L
-        if ((bitboard >> 17) & not_h_file){
-            attacks |= (bitboard >> 17);
-        }
-
-    }
-
-    //can D
-    if(not_8_rank){
-        //can RR
-        if ((bitboard << 10) & not_ab_file){
-            attacks |= (bitboard << 10);
-        }
-        
-        //can LL
-        if ((bitboard << 6) & not_hg_file){
-            attacks |= (bitboard << 6); 
-        }
-
-    }
-    
-    //can DD
-    if (not_78_rank){
-        //can L
-        if ((bitboard << 15) & not_h_file){
-            attacks |= (bitboard << 15);
-        }
-        
-        //can R
-        if ((bitboard << 17) & not_a_file){
-            attacks |= (bitboard << 17);
-        }
-
-    }
+    if (((bitboard << 10) & not_ab_file) && not_8_rank) attacks |= (bitboard << 10);
+    if (((bitboard << 6) & not_hg_file) && not_8_rank) attacks |= (bitboard << 6); 
+    if (((bitboard << 15) & not_h_file) && not_78_rank) attacks |= (bitboard << 15);
+    if (((bitboard << 17) & not_a_file) && not_78_rank) attacks |= (bitboard << 17);
 
     //return possible attacks for a knight at a given square
     return attacks;
 }
 
-//initialise knight attacks table
-void init_knight_attacks(){
-    for (int square = 0; square < 64; square++){
-        knight_attacks[square] = mask_knight_attacks(square);
-    }
-}
+/*
+KING ATTACK TABLE INITIALISER
+*/
 
+U64 mask_king_attacks(int square){
+    //result attacks bitboard
+    U64 attacks = 0ULL;
+
+    //piece bitboard
+    U64 bitboard = 0ULL;
+
+    set_bit(&bitboard, square);
+
+    if (bitboard >> 8) attacks |= (bitboard >> 8);
+    if ((bitboard >> 9) & not_h_file) attacks |= (bitboard >> 9);
+    if ((bitboard >> 7) & not_a_file) attacks |= (bitboard >> 7);
+    if ((bitboard >> 1) & not_h_file) attacks |= (bitboard >> 1);
+
+    if (bitboard << 8) attacks |= (bitboard << 8);
+    if ((bitboard << 9) & not_h_file) attacks |= (bitboard << 9);
+    if ((bitboard << 7) & not_a_file) attacks |= (bitboard << 7);
+    if ((bitboard << 1) & not_h_file) attacks |= (bitboard << 1);
+
+    return attacks;
+}
 
 /*
 ROOK ATTACK TABLE INITIALISER
-
 */
+
 
 U64 mask_rook_attacks(int square){
     //result attacks bitboard
@@ -167,7 +129,7 @@ U64 mask_rook_attacks(int square){
     //variable to move the rook square
     int step = 8;
  
-    //vertical up
+    //vertical up (have to check for step < 64, else from the 1st rank and going up )
     while (((bitboard >> step) & not_1_rank) && (step < 64)){
         attacks |= (bitboard >> step);
         step += 8;
@@ -175,23 +137,21 @@ U64 mask_rook_attacks(int square){
 
     //vertical down
     step = 8;
-    while ((bitboard << step) & not_8_rank){
+    while (((bitboard << step) & not_8_rank) && step < 64){
         attacks |= (bitboard << step);
         step += 8;
     }
 
-
     //horizontal left
     step = 1;
-    while ((bitboard >> step) & (not_h_file)){
+    while (((bitboard >> step) & (not_h_file)) && step < 64){
         attacks |= (bitboard >> step);
         step += 1;
     }
 
-
      //horizontal right
     step = 1;
-    while ((bitboard << step) & (not_a_file)){
+    while (((bitboard << step) & (not_a_file)) && step < 64){
         attacks |= (bitboard << step);
         step += 1;
     }
@@ -203,5 +163,34 @@ U64 mask_rook_attacks(int square){
 void init_rook_attacks(){
     for (int square = 0; square < 64; square++){
         rook_attacks[square] = mask_rook_attacks(square);
+    }
+}
+
+/*
+BISHOP ATTACK INITIALISER
+*/
+
+U64 mask_bishop_attacks(int square){
+    //result attacks bitboard
+    U64 attacks = 0ULL;
+
+    //piece bitboard
+    U64 bitboard = 0ULL;
+
+    set_bit(&bitboard, square);
+
+    return bitboard;
+
+}
+
+//initialise attacks table
+void init_leaper_attacks(){
+    for (int square = 0; square < 64; square++){
+        pawn_attacks[white][square] = mask_pawn_attacks(white, square);
+        pawn_attacks[black][square] = mask_pawn_attacks(black, square);
+
+        knight_attacks[square] = mask_knight_attacks(square);
+
+        king_attacks[square] = mask_king_attacks(square);
     }
 }

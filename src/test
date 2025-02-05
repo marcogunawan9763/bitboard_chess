@@ -1,25 +1,4 @@
-    //can D
-    if(not_8_rank){
-        //can RR
-        if ((bitboard >> 6) & not_hg_file){
-            attacks |= (bitboard >> 6);
-        }
-        
-        //can LL
-        if ((bitboard >> 10) & not_ab_file){
-            attacks |= (bitboard >> 10);
-        }
-
-    //can DD
-    if (not_78_rank){
-        //can R
-        if ((bitboard >> 15) & not_h_file){
-            attacks |= (bitboard >> 15);
-        }
-        
-        //can L
-        if ((bitboard >> 10) & not_a_file){
-            attacks |= (bitboard >> 10);
-        }
-
-    }
+ if (bitboard << 8) attacks |= (bitboard << 8);
+    if ((bitboard << 9) & not_h_file) attacks |= (bitboard << 9);
+    if ((bitboard << 7) & not_a_file) attacks |= (bitboard << 7);
+    if ((bitboard << 1) & not_h_file) attacks |= (bitboard << 1);

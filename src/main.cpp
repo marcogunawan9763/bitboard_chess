@@ -21,10 +21,10 @@ int main()
     }
     */
 
-    init_knight_attacks();
-    init_pawn_attacks();
-    init_rook_attacks();
-    print_bitboard(rook_attacks[a6]);
+    init_leaper_attacks();
+    print_bitboard(mask_king_attacks(h1));
+    print_bitboard(knight_attacks[e4]);
+    print_bitboard(knight_attacks[a1]);
 
     // Stop measuring time
     auto stop = std::chrono::high_resolution_clock::now();
