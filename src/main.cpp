@@ -9,7 +9,6 @@ int main()
     auto start = std::chrono::high_resolution_clock::now();
 
     /*
-    
     for(int rank = 0; rank < 8; rank ++){
         for(int file = 0; file < 8; file++){
             int square = rank * 8 + file;
@@ -21,9 +20,13 @@ int main()
     }
     */
 
+
     init_leaper_attacks();
     print_bitboard(mask_king_attacks(h1));
     cout << "number of bits: " << count_bits(mask_king_attacks(h1)) << '\n'; 
+    int idx = get_ls1b_index(mask_king_attacks(h1));
+    cout << "ls1b index: " << idx << "\n";
+    cout << "coordinates: " << square_to_coordinates[idx] << "\n";
 
     // Stop measuring time
     auto stop = std::chrono::high_resolution_clock::now();

@@ -74,3 +74,18 @@ int count_bits(U64 bitboard){
 
     return count;
 }
+
+//get the least significant 1st bit index (as a coordinate)
+int get_ls1b_index(U64 bitboard){
+
+    //error case handling
+    if (bitboard){
+        //count trailing bits before LS1B
+        return count_bits((bitboard & -bitboard) - 1);
+    }
+
+    else{
+        //return illegal index
+        return -1;
+    }
+}
