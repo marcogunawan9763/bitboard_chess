@@ -12,4 +12,6 @@ void set_bit(U64 *bitboard, int square);
 void pop_bit(U64 *bitboard, int square);
 void print_bitboard(U64 bitboard);
 
+int count_bits(U64 bitboard);
+
 #endif

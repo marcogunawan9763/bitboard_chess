@@ -57,4 +57,20 @@ void print_bitboard(U64 bitboard){
 
     //print bitboard as unsigned decimal number
     cout << "\n\nBitboard: " << bitboard << "\n\n";
+}   
+
+
+//helper function to count bits in a bitboard (Brian Kernighan's way)
+int count_bits(U64 bitboard){
+    int count = 0;
+
+    while(bitboard){
+        //incerement count
+        count ++;
+
+        bitboard &= bitboard - 1;
+
+    }
+
+    return count;
 }

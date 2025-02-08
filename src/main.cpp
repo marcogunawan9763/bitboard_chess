@@ -23,7 +23,7 @@ int main()
 
     init_leaper_attacks();
     print_bitboard(mask_king_attacks(h1));
-    print_bitboard(mask_bishop_attacks(e3));
+    cout << "number of bits: " << count_bits(mask_king_attacks(h1)) << '\n'; 
 
     // Stop measuring time
     auto stop = std::chrono::high_resolution_clock::now();
