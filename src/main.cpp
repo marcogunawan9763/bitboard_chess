@@ -23,8 +23,7 @@ int main()
 
     init_leaper_attacks();
     print_bitboard(mask_king_attacks(h1));
-    print_bitboard(knight_attacks[e4]);
-    print_bitboard(knight_attacks[a1]);
+    print_bitboard(mask_bishop_attacks(e3));
 
     // Stop measuring time
     auto stop = std::chrono::high_resolution_clock::now();

@@ -130,40 +130,33 @@ U64 mask_rook_attacks(int square){
     int step = 8;
  
     //vertical up (have to check for step < 64, else from the 1st rank and going up )
-    while (((bitboard >> step) & not_1_rank) && (step < 64)){
+    while (((bitboard >> step) & not_8_rank) && (step < 64)){
         attacks |= (bitboard >> step);
         step += 8;
     }
 
     //vertical down
     step = 8;
-    while (((bitboard << step) & not_8_rank) && step < 64){
+    while (((bitboard << step) & not_1_rank) && step < 64){
         attacks |= (bitboard << step);
         step += 8;
     }
 
     //horizontal left
     step = 1;
-    while (((bitboard >> step) & (not_h_file)) && step < 64){
+    while (((bitboard >> step) & (not_a_file)) && step < 64){
         attacks |= (bitboard >> step);
         step += 1;
     }
 
      //horizontal right
     step = 1;
-    while (((bitboard << step) & (not_a_file)) && step < 64){
+    while (((bitboard << step) & (not_h_file)) && step < 64){
         attacks |= (bitboard << step);
         step += 1;
     }
 
     return attacks;
-}
-
-//initilaises rook attacks
-void init_rook_attacks(){
-    for (int square = 0; square < 64; square++){
-        rook_attacks[square] = mask_rook_attacks(square);
-    }
 }
 
 /*
@@ -179,18 +172,60 @@ U64 mask_bishop_attacks(int square){
 
     set_bit(&bitboard, square);
 
-    return bitboard;
+    //up right
+    int step = 7;
+
+    while (((bitboard >> step) & (not_h_file) & (not_8_rank )) && step < 64){
+        attacks |= (bitboard >> step);
+        step += 7;
+    }
+
+    //up left
+    step = 9;
+
+    while (((bitboard >> step) & (not_a_file) & (not_8_rank )) && step < 64){
+        attacks |= (bitboard >> step);
+        step += 9;
+    }
+
+    //down right
+    step = 9;
+
+    while (((bitboard << step) & (not_h_file) & (not_1_rank )) && step < 64){
+        attacks |= (bitboard << step);
+        step += 9;
+    }
+
+    //down left
+    step = 7;
+
+    while (((bitboard << step) & (not_a_file) & (not_1_rank )) && step < 64){
+        attacks |= (bitboard << step);
+        step += 7;
+    }
+
+    return attacks;
 
 }
 
 //initialise attacks table
 void init_leaper_attacks(){
     for (int square = 0; square < 64; square++){
+        //initialise pawn tables
         pawn_attacks[white][square] = mask_pawn_attacks(white, square);
         pawn_attacks[black][square] = mask_pawn_attacks(black, square);
 
+        //initialise knight tables
         knight_attacks[square] = mask_knight_attacks(square);
 
+        //initialise king tables
         king_attacks[square] = mask_king_attacks(square);
+    }
+}
+
+//initilaises rook attacks
+void init_slider_attacks(){
+    for (int square = 0; square < 64; square++){
+        rook_attacks[square] = mask_rook_attacks(square);
     }
 }
