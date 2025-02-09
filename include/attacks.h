@@ -14,7 +14,8 @@ void init_leaper_attacks();
 
 U64 mask_rook_attacks(int square);
 U64 mask_bishop_attacks(int square);
-void init_slider_attacks();
+
+U64 set_occupancies(int index, int bits_in_mask, U64 attack_mask);
 
 // Lookup tables
 extern U64 pawn_attacks[2][64];

@@ -22,12 +22,15 @@ int main()
 
 
     init_leaper_attacks();
-    print_bitboard(mask_king_attacks(h1));
-    cout << "number of bits: " << count_bits(mask_king_attacks(h1)) << '\n'; 
-    int idx = get_ls1b_index(mask_king_attacks(h1));
-    cout << "ls1b index: " << idx << "\n";
-    cout << "coordinates: " << square_to_coordinates[idx] << "\n";
 
+    U64 attack_mask = mask_bishop_attacks(g1);
+    print_bitboard(attack_mask);
+    
+    /*
+    U64 occupancy = set_occupancies(4093, count_bits(attack_mask), attack_mask);
+    print_bitboard(occupancy);
+    
+    */
     // Stop measuring time
     auto stop = std::chrono::high_resolution_clock::now();
 

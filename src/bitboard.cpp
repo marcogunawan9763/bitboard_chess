@@ -80,7 +80,7 @@ int get_ls1b_index(U64 bitboard){
 
     //error case handling
     if (bitboard){
-        //count trailing bits before LS1B
+        //count trailing bits before LS
         return count_bits((bitboard & -bitboard) - 1);
     }
 

@@ -144,14 +144,14 @@ U64 mask_rook_attacks(int square){
 
     //horizontal left
     step = 1;
-    while (((bitboard >> step) & (not_a_file)) && step < 64){
+    while (((bitboard >> step) & (not_a_file) & (not_h_file)) && step < 64){
         attacks |= (bitboard >> step);
         step += 1;
     }
 
      //horizontal right
     step = 1;
-    while (((bitboard << step) & (not_h_file)) && step < 64){
+    while (((bitboard << step) & (not_h_file) & (not_a_file)) && step < 64){
         attacks |= (bitboard << step);
         step += 1;
     }
@@ -175,7 +175,7 @@ U64 mask_bishop_attacks(int square){
     //up right
     int step = 7;
 
-    while (((bitboard >> step) & (not_h_file) & (not_8_rank )) && step < 64){
+    while (((bitboard >> step) & (not_h_file) & (not_8_rank ) & (not_a_file)) && step < 64){
         attacks |= (bitboard >> step);
         step += 7;
     }
@@ -183,7 +183,7 @@ U64 mask_bishop_attacks(int square){
     //up left
     step = 9;
 
-    while (((bitboard >> step) & (not_a_file) & (not_8_rank )) && step < 64){
+    while (((bitboard >> step) & (not_a_file) & (not_8_rank ) & (not_h_file)) && step < 64){
         attacks |= (bitboard >> step);
         step += 9;
     }
@@ -191,7 +191,7 @@ U64 mask_bishop_attacks(int square){
     //down right
     step = 9;
 
-    while (((bitboard << step) & (not_h_file) & (not_1_rank )) && step < 64){
+    while (((bitboard << step) & (not_h_file) & (not_1_rank) & (not_a_file)) && step < 64){
         attacks |= (bitboard << step);
         step += 9;
     }
@@ -199,7 +199,7 @@ U64 mask_bishop_attacks(int square){
     //down left
     step = 7;
 
-    while (((bitboard << step) & (not_a_file) & (not_1_rank )) && step < 64){
+    while (((bitboard << step) & (not_a_file) & (not_1_rank ) & (not_h_file)) && step < 64){
         attacks |= (bitboard << step);
         step += 7;
     }
@@ -223,9 +223,26 @@ void init_leaper_attacks(){
     }
 }
 
-//initilaises rook attacks
-void init_slider_attacks(){
-    for (int square = 0; square < 64; square++){
-        rook_attacks[square] = mask_rook_attacks(square);
+//set occupancies map for all possible "blockers" in a given path - for slider pieces
+U64 set_occupancies(int index, int bits_in_mask, U64 attack_mask){
+    //occupancy map
+    U64 occupancy = 0ULL;
+
+    //loop over the range of bits in a given mask
+    for (int count = 0; count < bits_in_mask; count++){
+    
+        //get lsb1 index(attack map)
+        int square = get_ls1b_index(attack_mask);
+
+        //pop LSB in map
+        pop_bit(&attack_mask, square);
+
+        //populates occupancy map
+        if (index & (1 << count)){
+            occupancy |= (1ULL << square);
+        }
     }
+
+    return occupancy;
+
 }
