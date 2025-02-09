@@ -23,8 +23,13 @@ int main()
 
     init_leaper_attacks();
 
-    U64 attack_mask = mask_bishop_attacks(g1);
-    print_bitboard(attack_mask);
+    for (int square = 0; square < 64; square++){
+        if (square % 8 == 0){
+            cout << "\n";
+        }
+        cout << count_bits(mask_rook_attacks(square)) << ", ";
+    }
+
     
     /*
     U64 occupancy = set_occupancies(4093, count_bits(attack_mask), attack_mask);
@@ -32,6 +37,8 @@ int main()
     
     */
     // Stop measuring time
+
+
     auto stop = std::chrono::high_resolution_clock::now();
 
     // Calculate duration in milliseconds

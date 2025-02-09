@@ -3,7 +3,7 @@ CXX = g++
 CXXFLAGS = -Wall -Wextra -O2 -Iinclude
 
 # Source files (only include existing ones)
-SRC = src/main.cpp src/bitboard.cpp src/attacks.cpp
+SRC = src/main.cpp src/bitboard.cpp src/attacks.cpp src/lookup.cpp
 OBJ = $(SRC:src/%.cpp=build/%.o)
 
 # Output binary
