@@ -1,9 +1,9 @@
-/*
+/*************************************************************************************
  * File: bitboard.cpp
- * Description: This program contains the bitwise operations, get_bit, set_bit, and pop_bit. It also
- * prints out the bitboard representation of the chess table.
+ * Description: This program contains the bitwise operations that acts as helper functions for debugging,
+ * and other programs.
  * Last Updated: 2025-01-31
- */
+ *************************************************************************************/
 
 
 #include "lookup.h"

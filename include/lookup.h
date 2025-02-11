@@ -26,6 +26,9 @@ extern const char* square_to_coordinates[64];
 extern const int bishop_relevant_bits[64];
 extern const int rook_relevant_bits[64];
 
+extern const U64 RMagic[64];
+extern const U64 BMagic[64];
+
 /*
     not a file
 8  0 1 1 1 1 1 1 1

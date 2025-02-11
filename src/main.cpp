@@ -8,34 +8,8 @@ int main()
     // Start measuring time
     auto start = std::chrono::high_resolution_clock::now();
 
-    /*
-    for(int rank = 0; rank < 8; rank ++){
-        for(int file = 0; file < 8; file++){
-            int square = rank * 8 + file;
-
-            if (rank > 0){
-                set_bit(&bitboard, square);
-            }
-        }
-    }
-    */
-
-
-    init_leaper_attacks();
-
-    for (int square = 0; square < 64; square++){
-        if (square % 8 == 0){
-            cout << "\n";
-        }
-        cout << count_bits(mask_rook_attacks(square)) << ", ";
-    }
-
+    cout << RMagic[43] << "\n";
     
-    /*
-    U64 occupancy = set_occupancies(4093, count_bits(attack_mask), attack_mask);
-    print_bitboard(occupancy);
-    
-    */
     // Stop measuring time
 
 
