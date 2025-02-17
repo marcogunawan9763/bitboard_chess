@@ -26,6 +26,7 @@ U64 find_magic(int sq, int m, int bishop);
 void init_slider_attacks(int bishop);
 U64 get_bishop_attacks(int square, U64 occupancy);
 U64 get_rook_attacks(int square, U64 occupancy);
+U64 get_queen_attacks(int square, U64 occupancy);
 
 void init_all();
 

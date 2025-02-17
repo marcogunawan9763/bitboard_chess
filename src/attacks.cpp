@@ -456,6 +456,19 @@ U64 get_rook_attacks(int square, U64 occupancy){
     return rook_attacks[square][occupancy];
 }
 
+U64 get_queen_attacks(int square, U64 occupancy){
+    //init result attacks bitboard
+    U64 queen_attacks = 0ULL;
+
+    //get bishop attacks
+    queen_attacks = get_bishop_attacks(square, occupancy);
+
+    //get rook attacks
+    queen_attacks |= get_rook_attacks(square, occupancy);
+
+    return queen_attacks;
+}
+
 void init_all(){
     init_leaper_attacks();
     init_slider_attacks(0);

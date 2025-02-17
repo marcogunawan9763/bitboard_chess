@@ -21,7 +21,7 @@ int main()
 
     print_bitboard(occupancy);
 
-    print_bitboard(get_rook_attacks(f5, occupancy));
+    print_bitboard(get_queen_attacks(f5, occupancy));
     
     // Stop measuring time
     auto stop = std::chrono::high_resolution_clock::now();
