@@ -1,6 +1,6 @@
 # Compiler and flags
 CXX = g++
-CXXFLAGS = -Wall -Wextra -O2 -Iinclude
+CXXFLAGS = -m64 -Wall -Wextra -Wpedantic -O2 -Iinclude
 
 # Source files (only include existing ones)
 SRC = src/main.cpp src/bitboard.cpp src/attacks.cpp src/lookup.cpp

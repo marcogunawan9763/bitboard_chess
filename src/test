@@ -1,4 +1,5 @@
- if (bitboard << 8) attacks |= (bitboard << 8);
-    if ((bitboard << 9) & not_h_file) attacks |= (bitboard << 9);
-    if ((bitboard << 7) & not_a_file) attacks |= (bitboard << 7);
-    if ((bitboard << 1) & not_h_file) attacks |= (bitboard << 1);
+                U64 occupancy = set_occupancies(index, relevant_bits, attack_mask);
+
+                int magic_index = (occupancy * rook_magic[square]) >> (64 - rook_relevant_bits[square]);
+
+                rook_attacks[square][magic_index] = rook_attack_on_the_fly(square,occupancy);
