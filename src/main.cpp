@@ -10,19 +10,64 @@ int main()
 
     init_all();
 
-    U64 occupancy = 0ULL;
-    
-    set_bit(&occupancy, c5);
-    set_bit(&occupancy, f2);
-    set_bit(&occupancy, g7);
-    set_bit(&occupancy, b2);
-    set_bit(&occupancy, g5);
-    
+    //init white pieces (pawns)
+    set_bit(&bitboards[P], a2);
+    set_bit(&bitboards[P], b2);
+    set_bit(&bitboards[P], c2);
+    set_bit(&bitboards[P], d2);
+    set_bit(&bitboards[P], e2);
+    set_bit(&bitboards[P], f2);
+    set_bit(&bitboards[P], g2);
+    set_bit(&bitboards[P], h2);
 
-    print_bitboard(occupancy);
+    //knights
+    set_bit(&bitboards[N], b1);
+    set_bit(&bitboards[N], g1);
 
-    print_bitboard(get_queen_attacks(f5, occupancy));
+    //bishops
+    set_bit(&bitboards[B], c1);
+    set_bit(&bitboards[B], f1);
+
+    //rooks
+    set_bit(&bitboards[R], a1);
+    set_bit(&bitboards[R], h1);
     
+    //queen
+    set_bit(&bitboards[Q], d1);
+
+    //king
+    set_bit(&bitboards[K], e1);
+
+    //init black pieces (pawns)
+    set_bit(&bitboards[p], a7);
+    set_bit(&bitboards[p], b7);
+    set_bit(&bitboards[p], c7);
+    set_bit(&bitboards[p], d7);
+    set_bit(&bitboards[p], e7);
+    set_bit(&bitboards[p], f7);
+    set_bit(&bitboards[p], g7);
+    set_bit(&bitboards[p], h7);
+
+    //knights
+    set_bit(&bitboards[n], b8);
+    set_bit(&bitboards[n], g8);
+
+    //bishops
+    set_bit(&bitboards[b], c8);
+    set_bit(&bitboards[b], f8);
+
+    //rooks
+    set_bit(&bitboards[r], a8);
+    set_bit(&bitboards[r], h8);
+    
+    //queen
+    set_bit(&bitboards[q], d8);
+
+    //king
+    set_bit(&bitboards[k], e8);
+
+    print_board();
+
     // Stop measuring time
     auto stop = std::chrono::high_resolution_clock::now();
 

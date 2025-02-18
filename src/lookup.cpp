@@ -1,4 +1,28 @@
 #include "lookup.h"
+
+//piece bitboards
+U64 bitboards[12];
+
+//define occupancy bitboards
+U64 occupancies[3];
+
+//side to move
+int side;
+
+//enpassant square
+int enpassant = no_sq;
+
+//ASCII pieces
+const std::array<char, 12> ascii_pieces = {'P', 'N', 'B', 'R', 'Q', 'K', 'p', 'n', 'b', 'r', 'q', 'k'};
+
+//unicode pieces
+const char *unicode_pieces[12] = {"♙", "♘", "♗", "♖", "♕", "♔", "♟", "♞", "♝", "♜", "♛", "♚"};
+
+const std::unordered_map<char, int> char_pieces = {
+    {'P', P}, {'N', N}, {'B', B}, {'R', R}, {'Q', Q}, {'K', K},
+    {'p', p}, {'n', n}, {'b', b}, {'r', r}, {'q', q}, {'k', k}
+};
+
 const char* square_to_coordinates[64] = {
     "a8", "b8", "c8", "d8", "e8", "f8", "g8", "h8",  
     "a7", "b7", "c7", "d7", "e7", "f7", "g7", "h7",  

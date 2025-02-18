@@ -69,7 +69,6 @@ int count_bits(U64 bitboard){
         count ++;
 
         bitboard &= bitboard - 1;
-
     }
 
     return count;
@@ -88,4 +87,46 @@ int get_ls1b_index(U64 bitboard){
         //return illegal index
         return -1;
     }
+}
+
+//function to print out the chess board
+void print_board(){
+    //loop over ranks
+    for(int rank = 0; rank < 8; rank++){
+
+        //loop over files
+        for(int file = 0; file < 8; file++){
+
+            //init square
+            int square = rank * 8 + file;
+
+            //print ranks
+            if(!file){
+                cout << (8 - rank) << " ";
+            }
+
+            //define piece variable 
+            int piece = -1;
+
+            //loop over every bitboard piece
+            for (int bb_piece = P; bb_piece < k + 1; bb_piece++){
+                if (get_bit(bitboards[bb_piece], square)){
+                    piece = bb_piece;
+                }
+            }
+
+            cout << " ";
+
+            if (piece == -1){
+                cout << ".";
+            }
+
+            else {
+                cout << unicode_pieces[piece];
+            }
+        }
+        cout << "\n";
+    }
+    // print board files
+    cout << "\n" << "   a b c d e f g h" << "\n";
 }
