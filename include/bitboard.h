@@ -15,5 +15,6 @@ void print_bitboard(U64 bitboard);
 int count_bits(U64 bitboard);
 int get_ls1b_index(U64 bitboard);
 void print_board();
+void reset_board();
 
 #endif
