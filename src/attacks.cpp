@@ -1,7 +1,6 @@
 /*************************************************************************************
  * File: attacks.cpp
  * Description: This program generates the precalculated attack tables of every piece for lookup.
- * Last updated: 2025-02-05
  *************************************************************************************/
 
 #include "lookup.h"
@@ -469,7 +468,7 @@ U64 get_queen_attacks(int square, U64 occupancy){
     return queen_attacks;
 }
 
-void init_all(){
+void init_attacks(){
     init_leaper_attacks();
     init_slider_attacks(0);
     init_slider_attacks(1);

@@ -1,3 +1,9 @@
+/*************************************************************************************
+ * File: attacks.cpp
+ * Description: This program contains the definition of board squares and constants that are 
+ * required by other programs
+ *************************************************************************************/
+
 #include "lookup.h"
 
 //piece bitboards
