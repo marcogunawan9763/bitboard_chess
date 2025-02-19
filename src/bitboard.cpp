@@ -129,4 +129,13 @@ void print_board(){
     }
     // print board files
     cout << "\n" << "   a b c d e f g h" << "\n";
+
+    //print useful info
+    cout << "side_move: " << (side ? "black" : "white") << "\n";
+    cout << "enpassant: " << (square_to_coordinates[enpassant]) << "\n";
+    cout << "castling:  " << ((castle & wk) ? "K" : "-") <<
+                            ((castle & wq) ? "Q" : "-") <<
+                            ((castle & bk) ? "k" : "-") <<
+                            ((castle & bq) ? "q" : "-") << 
+                            "\n\n";
 }

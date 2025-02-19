@@ -66,6 +66,12 @@ int main()
     //king
     set_bit(&bitboards[k], e8);
 
+    //init castling
+    castle |= wk;
+    castle |= wq;
+    castle |= bk; 
+    castle |= bq;
+    
     print_board();
 
     // Stop measuring time

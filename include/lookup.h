@@ -43,7 +43,7 @@ extern int castle;
 /*
     bin dec
 
-    0001 1 white king cna castle to king side
+    0001 1 white king can castle to king side
     0010 2 white king can castle to queen side
     0100 4 black king can castle to king side
     1000 8 black king can castle to queen side
@@ -72,7 +72,7 @@ extern const std::unordered_map<char, int> char_pieces;
 //sides (colour)
 enum{white, black, both};
 
-extern const char* square_to_coordinates[64];
+extern const char* square_to_coordinates[65];
 extern const int bishop_relevant_bits[64];
 extern const int rook_relevant_bits[64];
 
