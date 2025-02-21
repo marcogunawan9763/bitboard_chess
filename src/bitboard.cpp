@@ -8,6 +8,9 @@
 #include "lookup.h"
 #include "bitboard.h"
 
+/*****************************
+BIT MANIPULATIONS
+*****************************/
 
 //checks if there is a bit in a given square
 bool get_bit(U64 bitboard, int square){
@@ -87,6 +90,9 @@ int get_ls1b_index(U64 bitboard){
         return -1;
     }
 }
+/*****************************
+BOARD REPRESENTATION
+*****************************/
 
 //function to print out the chess board
 void print_board(){

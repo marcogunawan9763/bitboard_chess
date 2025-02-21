@@ -30,6 +30,9 @@ U64 get_queen_attacks(int square, U64 occupancy);
 
 void init_attacks();
 
+int is_square_attacked(int square, int side);
+void print_attacked_squares(int side);
+
 // Lookup tables
 extern U64 pawn_attacks[2][64];
 extern U64 knight_attacks[64];

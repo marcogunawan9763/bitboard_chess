@@ -4,6 +4,14 @@
 #include "utilities.h"
 
 #include <chrono>
+
+// FEN dedug positions
+#define empty_board "8/8/8/8/8/8/8/8 w - - "
+#define start_position "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 "
+#define tricky_position "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq - 0 1 "
+#define killer_position "rnbqkb1r/pp1p1pPp/8/2p1pP2/1P1P4/3P3P/P1P1P3/RNBQKBNR w KQkq e6 0 1"
+#define cmk_position "r2q1rk1/ppp2ppp/2n1bn2/2b1p3/3pP3/3P1NPP/PPP1NPB1/R1BQ1RK1 b - - 0 9 "
+
 int main()
 {     
     // Start measuring time
@@ -11,13 +19,11 @@ int main()
 
     init_attacks();
     reset_board();
-    std::string fen = "rnbqkb1r/pp1p1pPp/8/2p1pP2/1P1P4/3P3P/P1P1P3/RNBQKBNR w KQkq e6 0 1";
+    std::string fen = start_position;
 
     parse_FEN(fen);
     print_board();
-    print_bitboard(occupancies[white]);
-    print_bitboard(occupancies[black]);
-    print_bitboard(occupancies[both]);
+    print_attacked_squares(black);
 
     // Stop measuring time
     auto stop = std::chrono::high_resolution_clock::now();

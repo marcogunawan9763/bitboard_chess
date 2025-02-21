@@ -474,4 +474,54 @@ void init_attacks(){
     init_slider_attacks(1);
 }
 
+int is_square_attacked(int square, int side){
+    //attacked by white pawns
+    if(side == white && (pawn_attacks[black][square] & bitboards[P])) return 1;
+
+    //attacked by black pawns
+    if(side == black && (pawn_attacks[white][square] & bitboards[p])) return 1;
+
+    //attacked by knight
+    if(knight_attacks[square] & ((side == white) ? bitboards[N] : bitboards[n])) return 1;
+
+    //attacked by king
+    if(king_attacks[square] & ((side == white) ? bitboards[K] : bitboards[k])) return 1;
+
+    //attacked by bishop
+    if(get_bishop_attacks(square, occupancies[both]) & ((side == white) ? bitboards[B] : bitboards[b])) return 1;
+    
+    //attacked by rook
+    if(get_rook_attacks(square, occupancies[both]) & ((side == white) ? bitboards[R] : bitboards[r])) return 1;
+
+    //attacked by queen
+    if(get_queen_attacks(square, occupancies[both]) & ((side == white) ? bitboards[Q] : bitboards[q])) return 1;
+
+    //default return not attacked
+    return 0;
+}
+
+void print_attacked_squares(int side){
+    //loop over board ranks
+    for (int rank = 0; rank < 8; rank++){
+
+        //loop over board files
+        for (int file = 0; file < 8; file++){
+
+            //convert file & rank into square index
+            int square = rank * 8 + file;
+
+            //print ranks
+            if(!file){
+                cout << (8 - rank) << " ";
+            }
+
+            //print bitboard state (either 1 or 0)
+            cout << " " << is_square_attacked(square, side);
+        }
+
+        //print new line every rank
+        cout << "\n";
+    }
+}
+
 
