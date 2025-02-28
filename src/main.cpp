@@ -2,6 +2,7 @@
 #include "bitboard.h"
 #include "attacks.h"
 #include "utilities.h"
+#include "movegen.h"
 
 #include <chrono>
 
@@ -19,11 +20,11 @@ int main()
 
     init_attacks();
     reset_board();
-    std::string fen = start_position;
+    std::string fen = tricky_position;
 
     parse_FEN(fen);
     print_board();
-    print_attacked_squares(black);
+    generate_moves();
 
     // Stop measuring time
     auto stop = std::chrono::high_resolution_clock::now();
