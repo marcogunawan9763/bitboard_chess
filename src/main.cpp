@@ -26,6 +26,7 @@ int main()
     print_board();
     generate_moves();
 
+
     // Stop measuring time
     auto stop = std::chrono::high_resolution_clock::now();
 

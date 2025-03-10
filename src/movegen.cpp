@@ -16,6 +16,7 @@ void generate_moves(){
 
     cout << "side: " << white << "\n";
 
+    //loop over every piece
     for(int piece = P; piece <=k; piece++){
         //init piece bitboard
         bitboard = bitboards[piece];
@@ -168,15 +169,178 @@ void generate_moves(){
             }
         }
 
+        
         //generate knight moves
+        if ((side == white) ? piece == N : piece == n){
+            //loop over every knight(s)
+            while (bitboard){
+                //get one knight
+                src_square = get_ls1b_index(bitboard);
+
+                //init attack bitboard (~occupancies means we ignore our own pieces)
+                attacks = knight_attacks[src_square] & ((side == white) ? ~occupancies[white] : ~occupancies[black]);
+
+                while(attacks){
+                    //init target square
+                    target_square = get_ls1b_index(attacks);
+
+                    //quite move
+                    if(!get_bit(((side == white) ? occupancies[black] : occupancies[white]), target_square)){
+                        cout << "piece move: N" << square_to_coordinates[target_square] << "\n";
+                    }
+
+                    //capture move
+                    else{
+                        cout << "piece capture: Nx" << square_to_coordinates[target_square] << "\n";
+                    }
+
+                    //pop lsb in attacks
+                    pop_bit(&attacks, target_square);
+                }
+
+                //pop lsb of knight
+                pop_bit(&bitboard, src_square);
+
+            }
+        }
+        
+
 
         //generate king moves
+        if ((side == white) ? piece == K : piece == k){
+            //loop over every kings(s)
+            while (bitboard){
+                //get one king
+                src_square = get_ls1b_index(bitboard);
+
+                //init attack bitboard (~occupancies means we ignore our own pieces)
+                attacks = king_attacks[src_square] & ((side == white) ? ~occupancies[white] : ~occupancies[black]);
+
+                while(attacks){
+                    //init target square
+                    target_square = get_ls1b_index(attacks);
+
+                    //quite move
+                    if(!get_bit(((side == white) ? occupancies[black] : occupancies[white]), target_square)){
+                        cout << "piece move: K" << square_to_coordinates[target_square] << "\n";
+                    }
+
+                    //capture move
+                    else{
+                        cout << "piece capture: Kx" << square_to_coordinates[target_square] << "\n";
+                    }
+
+                    //pop lsb in attacks
+                    pop_bit(&attacks, target_square);
+                }
+
+                //pop lsb of king
+                pop_bit(&bitboard, src_square);
+
+            }
+        }
 
         //generate bishop moves
+        if ((side == white) ? piece == B : piece == b){
+            //loop over every bishop(s)
+            while (bitboard){
+                //get one bishop
+                src_square = get_ls1b_index(bitboard);
+
+                //init attack bitboard (~occupancies means we ignore our own pieces)
+                attacks = get_bishop_attacks(src_square, occupancies[both]) & ((side == white) ? ~occupancies[white] : ~occupancies[black]);
+
+                while(attacks){
+                    //init target square
+                    target_square = get_ls1b_index(attacks);
+
+                    //quite move
+                    if(!get_bit(((side == white) ? occupancies[black] : occupancies[white]), target_square)){
+                        cout << "piece move: B" << square_to_coordinates[target_square] << "\n";
+                    }
+
+                    //capture move
+                    else{
+                        cout << "piece capture: Bx" << square_to_coordinates[target_square] << "\n";
+                    }
+
+                    //pop lsb in attacks
+                    pop_bit(&attacks, target_square);
+                }
+
+                //pop lsb of bishop
+                pop_bit(&bitboard, src_square);
+
+            }
+        }
 
         //generate rooks moves
+        if ((side == white) ? piece == R : piece == r){
+            //loop over every rook(s)
+            while (bitboard){
+                //get one rook
+                src_square = get_ls1b_index(bitboard);
+
+                //init attack bitboard (~occupancies means we ignore our own pieces)
+                attacks = get_rook_attacks(src_square, occupancies[both]) & ((side == white) ? ~occupancies[white] : ~occupancies[black]);
+
+                while(attacks){
+                    //init target square
+                    target_square = get_ls1b_index(attacks);
+
+                    //quite move
+                    if(!get_bit(((side == white) ? occupancies[black] : occupancies[white]), target_square)){
+                        cout << "piece move: R" << square_to_coordinates[target_square] << "\n";
+                    }
+
+                    //capture move
+                    else{
+                        cout << "piece capture: Rx" << square_to_coordinates[target_square] << "\n";
+                    }
+
+                    //pop lsb in attacks
+                    pop_bit(&attacks, target_square);
+                }
+
+                //pop lsb of rook
+                pop_bit(&bitboard, src_square);
+
+            }
+        }
 
         //generate queen moves
+        if ((side == white) ? piece == Q : piece == q){
+            //loop over every queen(s)
+            while (bitboard){
+                //get one queen
+                src_square = get_ls1b_index(bitboard);
+
+                //init attack bitboard (~occupancies means we ignore our own pieces)
+                attacks = get_queen_attacks(src_square, occupancies[both]) & ((side == white) ? ~occupancies[white] : ~occupancies[black]);
+
+                while(attacks){
+                    //init target square
+                    target_square = get_ls1b_index(attacks);
+
+                    //quite move
+                    if(!get_bit(((side == white) ? occupancies[black] : occupancies[white]), target_square)){
+                        cout << "piece move: Q" << square_to_coordinates[target_square] << "\n";
+                    }
+
+                    //capture move
+                    else{
+                        cout << "piece capture: Qx" << square_to_coordinates[target_square] << "\n";
+                    }
+
+                    //pop lsb in attacks
+                    pop_bit(&attacks, target_square);
+                }
+
+                //pop lsb of queen
+                pop_bit(&bitboard, src_square);
+
+            }
+        }
 
     }
 }
