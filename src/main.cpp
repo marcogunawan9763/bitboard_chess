@@ -20,7 +20,7 @@ int main()
 
     init_attacks();
     reset_board();
-    std::string fen = tricky_position;
+    std::string fen = killer_position;
 
     parse_FEN(fen);
     print_board();

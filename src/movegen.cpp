@@ -14,8 +14,6 @@ void generate_moves(){
     //define current piece's bitboard and is attacks
     U64 bitboard, attacks;
 
-    cout << "side: " << white << "\n";
-
     //loop over every piece
     for(int piece = P; piece <=k; piece++){
         //init piece bitboard
@@ -93,6 +91,31 @@ void generate_moves(){
                     pop_bit(&bitboard, src_square);
                 }
             }
+
+            //castling
+            if (piece == K){
+                //king side castling
+                if (castle & wk){
+                    //make sure squares between king and rook are empty
+                    if (!get_bit(occupancies[both], f1) && !get_bit(occupancies[both], g1)){
+                        //square between is not under attack
+                        if(!is_square_attacked(e1, black) && !is_square_attacked(f1, black) && !is_square_attacked(g1,black)){
+                            cout << "castling move: O-O \n";
+                        }
+                    }
+                }
+
+                //queen side castling
+                if(castle & wq){
+                    //squares are empty between
+                    if (!get_bit(occupancies[both], d1) && !get_bit(occupancies[both], c1) && !get_bit(occupancies[both], b1)){
+                        //square between is not under attack
+                        if(!is_square_attacked(e1, black) && !is_square_attacked(d1, black) && !is_square_attacked(c1,black)){
+                            cout << "castling move: O-O-O \n";
+                        }
+                    }
+                }
+            }
         }
 
         //generate black pawns and black castling moves
@@ -167,9 +190,34 @@ void generate_moves(){
                     pop_bit(&bitboard, src_square);
                 }
             }
+
+            //castling
+            if (piece == k){
+                //king side castling
+                if (castle & wk){
+                    //make sure squares between king and rook are empty
+                    if (!get_bit(occupancies[both], f8) && !get_bit(occupancies[both], g8)){
+                        //square between is not under attack
+                        if(!is_square_attacked(e8, white) && !is_square_attacked(f8, white) && !is_square_attacked(g8,white)){
+                            cout << "castling move: O-O \n";
+                        }
+                    }
+                }
+
+                //queen side castling
+                if(castle & wq){
+                    //squares are empty between
+                    if (!get_bit(occupancies[both], d8) && !get_bit(occupancies[both], c8) && !get_bit(occupancies[both], b8)){
+                        //square between is not under attack
+                        if(!is_square_attacked(e8, white) && !is_square_attacked(d8, white) && !is_square_attacked(c8,white)){
+                            cout << "castling move: O-O-O \n";
+                        }
+                    }
+                }
+            }
         }
 
-        
+        /*
         //generate knight moves
         if ((side == white) ? piece == N : piece == n){
             //loop over every knight(s)
@@ -341,6 +389,7 @@ void generate_moves(){
 
             }
         }
+        */
 
     }
 }

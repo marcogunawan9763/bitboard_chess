@@ -523,5 +523,3 @@ void print_attacked_squares(int side){
         cout << "\n";
     }
 }
-
-
