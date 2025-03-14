@@ -217,7 +217,6 @@ void generate_moves(){
             }
         }
 
-        /*
         //generate knight moves
         if ((side == white) ? piece == N : piece == n){
             //loop over every knight(s)
@@ -389,7 +388,46 @@ void generate_moves(){
 
             }
         }
-        */
-
     }
 }
+
+uint32_t encode_move(uint8_t source, uint8_t target, uint8_t piece, uint8_t promoted, 
+                     bool capture, bool d_pawn, bool enpassant, bool castling) {
+    return (source) | (target << 6) | (piece << 12) | (promoted << 16) | 
+           ((capture ? 1U : 0U) << 20) | ((d_pawn ? 1U : 0U) << 21) | 
+           ((enpassant ? 1U : 0U) << 22) | ((castling ? 1U : 0U) << 23);
+}
+
+uint8_t get_move_source(uint32_t move) {
+    return (move & 0x3f);
+}
+
+uint8_t get_move_target(uint32_t move) {
+    return ((move & 0xfc0) >> 6);
+}
+
+uint8_t get_move_piece(uint32_t move) {
+    return ((move & 0xf000) >> 12);
+}
+
+uint8_t get_move_promoted(uint32_t move) {
+    return ((move & 0xf0000) >> 16);
+}
+
+bool get_move_capture(uint32_t move) {
+    return ((move & 0x100000) ? 1 : 0);
+}
+
+bool get_move_d_pawn(uint32_t move) {
+    return ((move & 0x200000) ? 1 : 0);
+}
+
+bool get_move_enpassant(uint32_t move) {
+    return ((move & 0x400000) ? 1 : 0);
+}
+
+bool get_move_castling(uint32_t move) {
+    return ((move & 0x800000) ? 1 : 0);
+}
+
+

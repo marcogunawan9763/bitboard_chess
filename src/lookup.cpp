@@ -43,6 +43,19 @@ const char* square_to_coordinates[65] = {
     "a1", "b1", "c1", "d1", "e1", "f1", "g1", "h1", "no_sq"
 };
 
+/*
+              BINARY move bits                                      hexidecimal constants
+
+0000 0000 0000 0000 0011 1111 source square (64 squares)            0x3f
+0000 0000 0000 1111 1100 0000 target square (64 squares)            0xfc0
+0000 0000 1111 0000 0000 0000 piece (12 pieces)                     0xf000
+0000 1111 0000 0000 0000 0000 promoted piece (12 pieces)            0xf0000
+0001 0000 0000 0000 0000 0000 capture (yes/no)                      0x100000
+0010 0000 0000 0000 0000 0000 double push (yes/no)                  0x200000
+0100 0000 0000 0000 0000 0000 en passant (yes/no)                   0x400000
+1000 0000 0000 0000 0000 0000 castling (yes/no)                     0x800000
+*/
+
 const int bishop_relevant_bits[64]= {
     6, 5, 5, 5, 5, 5, 5, 6,
     5, 5, 5, 5, 5, 5, 5, 5,
