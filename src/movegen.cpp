@@ -7,7 +7,7 @@
 #include "attacks.h"
 #include "bitboard.h"
 
-void generate_moves(){
+void generate_moves(moves_obj *move_list){
     //define source squre and target square
     int src_square, target_square;
 
@@ -391,6 +391,7 @@ void generate_moves(){
     }
 }
 
+//moves encoder (check lookup to see binary encoding of move)
 uint32_t encode_move(uint8_t source, uint8_t target, uint8_t piece, uint8_t promoted, 
                      bool capture, bool d_pawn, bool enpassant, bool castling) {
     return (source) | (target << 6) | (piece << 12) | (promoted << 16) | 
@@ -398,6 +399,7 @@ uint32_t encode_move(uint8_t source, uint8_t target, uint8_t piece, uint8_t prom
            ((enpassant ? 1U : 0U) << 22) | ((castling ? 1U : 0U) << 23);
 }
 
+//moves decoder(s), takes out the neccesary portions of a move integer
 uint8_t get_move_source(uint32_t move) {
     return (move & 0x3f);
 }
@@ -418,7 +420,7 @@ bool get_move_capture(uint32_t move) {
     return ((move & 0x100000) ? 1 : 0);
 }
 
-bool get_move_d_pawn(uint32_t move) {
+bool get_move_dpawn(uint32_t move) {
     return ((move & 0x200000) ? 1 : 0);
 }
 
@@ -430,4 +432,38 @@ bool get_move_castling(uint32_t move) {
     return ((move & 0x800000) ? 1 : 0);
 }
 
+//add move to the movelist
+void add_move(moves_obj *move_list, int move){
+    //store move
+    move_list -> moves[move_list -> count] = move;
 
+    //increment move count
+    move_list -> count ++;
+}
+
+//print move (for UCI purposes)
+void print_move(int move){
+    cout << square_to_coordinates[get_move_source(move)] << square_to_coordinates[get_move_target(move)] << promoted_pieces[get_move_promoted(move)];
+}
+
+//print move 
+void print_move_list(moves_obj *move_list){
+    cout << "\nmove    piece    capture    double    enpassant    castling\n";
+
+    //loop over moves within a move list
+    for (int move_count = 0; move_count < move_list -> count; move_count++){
+        //init move
+        int move = move_list->moves[move_count];
+
+        cout << square_to_coordinates[get_move_source(move)]
+        << square_to_coordinates[get_move_target(move)]
+        << promoted_pieces[get_move_promoted(move)] << (promoted_pieces[get_move_promoted(move)] == 0 ? "    ": "   ")
+        << unicode_pieces[get_move_piece(move)] << "        "
+        << square_to_coordinates[get_move_capture(move)] << "         "
+        << get_move_dpawn(move) << "         "
+        << get_move_enpassant(move) << "            "
+        << get_move_castling(move)
+        << "\n";
+
+    }
+}

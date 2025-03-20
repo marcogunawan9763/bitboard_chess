@@ -23,6 +23,14 @@ enum {
     a1, b1, c1, d1, e1, f1, g1, h1, no_sq
 };
 
+//moveslist defintion
+typedef struct{
+    //moves
+    int moves[256];
+
+    //move count
+    int count;
+}moves_obj;
 
 //define bitboard
 extern U64 bitboards[12];
@@ -60,6 +68,9 @@ enum {wk= 1, wq= 2, bk = 4, bq = 8};
 
 //encode pieces (capital for white, lowercase for black)
 enum {P, N, B, R, Q, K, p, n, b, r, q, k};
+
+//promoted pieces
+extern const char promoted_pieces[];
 
 //ASCII pieces
 extern const std::array<char, 12> ascii_pieces;

@@ -23,4 +23,9 @@ bool get_move_dpawn(uint32_t move);
 bool get_move_enpassant(uint32_t move);
 bool get_move_castling(uint32_t move);
 
+//move list
+void print_move(int move);
+void print_move_list(moves_obj *move_list);
+void add_move(moves_obj *move_list, int move);
+
 #endif

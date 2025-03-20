@@ -32,6 +32,22 @@ const std::unordered_map<char, int> char_pieces = {
     {'p', p}, {'n', n}, {'b', b}, {'r', r}, {'q', q}, {'k', k}
 };
 
+//promoted pieces
+const char promoted_pieces[] = {
+    0,    // P (not a promotion piece)
+    'n',  // N
+    'b',  // B
+    'r',  // R
+    'q',  // Q
+    0,    // K (not a promotion piece)
+    0,    // p (not a promotion piece)
+    'n',  // n
+    'b',  // b
+    'r',  // r
+    'q',  // q
+    0     // k (not a promotion piece)
+};
+
 const char* square_to_coordinates[65] = {
     "a8", "b8", "c8", "d8", "e8", "f8", "g8", "h8",  
     "a7", "b7", "c7", "d7", "e7", "f7", "g7", "h7",  

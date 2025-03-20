@@ -25,19 +25,16 @@ int main()
     parse_FEN(fen);
     print_board();
 
+    moves_obj move_list;
+    cout << move_list.moves;
+    move_list.count = 0;
+
+    add_move(&move_list, encode_move(e7, e8, P, Q, 0, 0, 0, 0));
+    add_move(&move_list, encode_move(d6, d5, K, 0, 0, 0, 0, 0));
+    add_move(&move_list, encode_move(a7, a8, P, B, 0, 0, 0, 0));
+
     //create move
-    int move = encode_move(e2, e4, P, 0, 0, 0, 0, 0);
-
-    //extract target square from move
-    int target_square = get_move_target(move);
-
-    cout << ("src_square: ") << square_to_coordinates[get_move_source(move)] << "\n";
-
-    cout << ("target_square: ") << square_to_coordinates[target_square] << "\n";
-
-    cout << ("piece: ") << unicode_pieces[get_move_piece(move)] << "\n";
-
-    cout << ("castling: ") << get_move_castling(move);
+    print_move_list(&move_list);
 
 
     // Stop measuring time
