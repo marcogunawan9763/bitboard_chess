@@ -7,7 +7,8 @@
 using namespace std;
 using U64 = uint64_t;
 
-void generate_moves();
+//main move generation function
+void generate_moves(moves_obj *move_list);
 
 //encoding move 
 uint32_t encode_move(uint8_t source, uint8_t target, uint8_t piece, uint8_t promoted, 
