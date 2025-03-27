@@ -24,15 +24,7 @@ int main()
 
     parse_FEN(fen);
     print_board();
-
-    moves_obj move_list;
-
-    move_list.count = 0;
-
-    //create move
-    generate_moves(&move_list);
-    print_move_list(&move_list);
-
+    
     // Stop measuring time
     auto stop = std::chrono::high_resolution_clock::now();
 

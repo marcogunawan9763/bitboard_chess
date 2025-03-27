@@ -7,6 +7,20 @@
 using namespace std;
 using U64 = uint64_t;
 
+//macros for copy/make approach
+#define copy_board() \
+    U64 bitboards_copy[12], occupancies_copy[3]; \
+    int side_copy = side, enpassant_copy = enpassant, castle_copy = castle; \
+    memcpy(bitboards_copy, bitboards, sizeof(bitboards)); \
+    memcpy(occupancies_copy, occupancies, sizeof(occupancies))
+
+#define restore_board() \
+    memcpy(bitboards, bitboards_copy, sizeof(bitboards)); \
+    memcpy(occupancies, occupancies_copy, sizeof(occupancies)); \
+    side = side_copy; \
+    enpassant = enpassant_copy; \
+    castle = castle_copy
+
 //main move generation function
 void generate_moves(moves_obj *move_list);
 
